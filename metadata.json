@@ -1,0 +1,6 @@
+{
+  "name": "AdSynthesize AI",
+  "description": "Neural-trained AI Workstation & Campaign Builder for Google Ads assets, RSA generation, keyword intelligence, landing page audits, PMax asset generation, and ROAS modeling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
