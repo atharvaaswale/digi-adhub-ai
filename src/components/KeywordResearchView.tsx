@@ -177,7 +177,7 @@ export const KeywordResearchView: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto custom-scrollbar">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs min-w-[600px]">
             <thead>
               <tr className="text-[11px] font-mono-label text-slate-400 border-b border-slate-800">
                 <th className="pb-3 font-semibold">Keyword Phrase</th>

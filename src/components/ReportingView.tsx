@@ -28,12 +28,12 @@ export const ReportingView: React.FC = () => {
         </div>
 
         {/* Time Range Selector */}
-        <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+        <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs w-full sm:w-auto overflow-x-auto shrink-0">
           {(['7d', '30d', '90d'] as const).map((r) => (
             <button
               key={r}
               onClick={() => setTimeRange(r)}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg font-medium transition-colors whitespace-nowrap ${
                 timeRange === r ? 'bg-indigo-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -85,7 +85,7 @@ export const ReportingView: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto custom-scrollbar">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs min-w-[550px]">
             <thead>
               <tr className="text-[11px] font-mono-label text-slate-400 border-b border-slate-800">
                 <th className="pb-3 font-semibold">Campaign Name</th>

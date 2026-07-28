@@ -229,14 +229,14 @@ export const RoasCalculatorView: React.FC<RoasCalculatorViewProps> = ({ onSyncGo
         </div>
 
         {/* Sync Action Callout */}
-        <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <div className="text-xs font-bold text-white">Apply Bidding Strategy to Google Ads</div>
             <div className="text-[11px] text-slate-400">Target ROAS bidding strategy automatically configures max bid limits based on model.</div>
           </div>
           <button
             onClick={onSyncGoogleAds}
-            className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-lg shadow-indigo-600/20 transition-all flex items-center gap-2"
+            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-lg shadow-indigo-600/20 transition-all flex items-center justify-center gap-2 shrink-0"
           >
             <span className="material-symbols-outlined text-base">cloud_sync</span>
             <span>Sync Strategy</span>

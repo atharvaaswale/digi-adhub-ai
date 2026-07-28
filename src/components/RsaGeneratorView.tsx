@@ -157,10 +157,10 @@ export const RsaGeneratorView: React.FC = () => {
       {/* Main Form & RSA Editor */}
       <div className={`flex-1 flex-col gap-5 min-w-0 ${mobileTab === 'inputs' ? 'flex' : 'hidden lg:flex'}`}>
         {/* Top Generator Header */}
-        <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-cyan-400 text-xl">ads_click</span>
+        <div className="p-4 sm:p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start sm:items-center gap-2.5">
+              <span className="material-symbols-outlined text-cyan-400 text-xl shrink-0 mt-0.5 sm:mt-0">ads_click</span>
               <div>
                 <h2 className="text-base font-bold text-white">Google Responsive Search Ads (RSA) Builder</h2>
                 <p className="text-xs text-slate-400">Generate up to 15 Headlines and 4 Descriptions for Google's machine learning asset combinations.</p>
@@ -169,7 +169,7 @@ export const RsaGeneratorView: React.FC = () => {
             <button
               onClick={handleGenerateRSA}
               disabled={loading}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center gap-2 shadow-lg shadow-cyan-600/20 transition-all disabled:opacity-50"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/20 transition-all disabled:opacity-50 shrink-0"
             >
               {loading ? (
                 <>
@@ -217,8 +217,8 @@ export const RsaGeneratorView: React.FC = () => {
         </div>
 
         {/* 15 Headlines Editor */}
-        <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-3">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div className="p-4 sm:p-5 rounded-2xl glass-panel border border-slate-800 space-y-3">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between pb-2 border-b border-slate-800">
             <span className="text-xs font-bold text-slate-200 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-cyan-400" />
               Headlines (15 Slots Max, 30 Chars Limit)

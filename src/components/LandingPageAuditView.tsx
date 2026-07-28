@@ -188,10 +188,10 @@ export const LandingPageAuditView: React.FC = () => {
       {/* Audit Output Workspace */}
       <div className={`flex-1 flex-col gap-5 min-w-0 ${mobileTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}>
         {/* Conversion Health Score Card */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5">
+        <div className="p-4 sm:p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <div className="flex items-center gap-4 sm:gap-5 w-full sm:w-auto">
             {/* Gauge SVG Circle */}
-            <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center shrink-0">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                 <path
                   className="text-slate-800"
@@ -211,14 +211,14 @@ export const LandingPageAuditView: React.FC = () => {
                 />
               </svg>
               <div className="absolute flex flex-col items-center">
-                <span className="text-xl font-extrabold text-white">{audit.healthScore}</span>
+                <span className="text-lg sm:text-xl font-extrabold text-white">{audit.healthScore}</span>
                 <span className="text-[9px] text-slate-400 font-mono-label">SCORE</span>
               </div>
             </div>
 
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-white">Conversion Health Score</h3>
+            <div className="space-y-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="text-sm sm:text-base font-bold text-white">Conversion Health Score</h3>
                 <span className="text-[10px] font-mono-label bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800 font-bold">
                   {audit.healthStatus}
                 </span>
@@ -229,7 +229,7 @@ export const LandingPageAuditView: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 border-t md:border-t-0 md:border-l border-slate-800 pt-4 md:pt-0 md:pl-6 text-xs">
+          <div className="flex gap-4 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-6 text-xs w-full sm:w-auto justify-between sm:justify-start">
             <div>
               <div className="text-slate-400 text-[10px] font-mono-label">VISIBILITY</div>
               <div className="text-lg font-bold text-white">{audit.visibility}</div>

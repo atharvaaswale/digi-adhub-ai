@@ -30,7 +30,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#020617] text-[#dae2fd] overflow-hidden">
+    <div className="h-screen w-screen max-w-full flex flex-col bg-[#020617] text-[#dae2fd] overflow-x-hidden overflow-y-hidden">
       {/* Global Toast Notification */}
       {globalToast && (
         <div className="fixed top-20 right-6 bg-indigo-600 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-indigo-400 z-50 flex items-center gap-2 animate-bounce">
@@ -50,7 +50,7 @@ export default function App() {
       />
 
       {/* Main Workspace Body */}
-      <div className="flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row min-h-0 w-full max-w-full overflow-x-hidden overflow-y-hidden">
         {/* Left Sidebar Navigation & Mobile Drawer */}
         <Sidebar
           currentView={currentView}
@@ -62,7 +62,7 @@ export default function App() {
         />
 
         {activeTab === 'campaigns' && (
-          <main className="flex-1 flex flex-col min-w-0 bg-[#020617] overflow-hidden">
+          <main className="flex-1 flex flex-col min-w-0 max-w-full bg-[#020617] overflow-y-auto lg:overflow-hidden">
             {currentView === 'ai_builder' && (
               <AiCampaignBuilderView onLaunchCampaign={() => setIsLaunchModalOpen(true)} />
             )}

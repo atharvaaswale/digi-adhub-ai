@@ -51,14 +51,14 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="h-16 border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl px-4 flex items-center justify-between z-30 shrink-0 sticky top-0">
-      {/* Left Branding & Workspace Selector */}
-      <div className="flex items-center gap-3">
+    <header className="w-full h-16 px-3 sm:px-4 flex items-center justify-between overflow-hidden bg-slate-950 border-b border-slate-800 shrink-0 sticky top-0 z-30">
+      {/* Left Branding & Hamburger Toggle */}
+      <div className="flex items-center gap-2 min-w-0">
         {/* Mobile Hamburger Toggle Button */}
         {onToggleMobileMenu && (
           <button
             onClick={onToggleMobileMenu}
-            className="lg:hidden flex items-center justify-center p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors"
+            className="lg:hidden flex items-center justify-center p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors shrink-0"
             aria-label="Toggle Navigation Menu"
           >
             <span className="material-symbols-outlined text-xl">
@@ -67,29 +67,30 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         )}
 
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 font-bold text-lg">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 font-bold text-lg shrink-0">
             <span className="material-symbols-outlined text-xl">auto_awesome</span>
           </div>
-          <div className="leading-tight">
-            <h1 className="font-bold text-base bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">
-              AdSynthesize <span className="text-indigo-400 font-extrabold text-xs px-1.5 py-0.5 rounded bg-indigo-950/80 border border-indigo-800/50 ml-1">AI</span>
+          <div className="leading-tight min-w-0">
+            <h1 className="font-bold text-sm sm:text-base bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent truncate flex items-center">
+              <span>AdSynthesize</span>
+              <span className="text-indigo-400 font-extrabold text-[10px] sm:text-xs px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded bg-indigo-950/80 border border-indigo-800/50 ml-1 shrink-0">AI</span>
             </h1>
-            <p className="text-[10px] text-slate-400 font-mono-label tracking-tight">NEURAL ADS WORKSTATION</p>
+            <p className="text-[10px] text-slate-400 font-mono-label tracking-tight hidden sm:block">NEURAL ADS WORKSTATION</p>
           </div>
         </div>
 
-        <div className="h-5 w-[1px] bg-slate-800 hidden sm:block" />
+        <div className="h-5 w-[1px] bg-slate-800 hidden md:block shrink-0" />
 
         {/* Workspace Dropdown */}
-        <div className="relative">
+        <div className="relative hidden sm:block">
           <button
             onClick={() => setIsWorkspaceOpen(!isWorkspaceOpen)}
-            className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-slate-900/90 border border-slate-800 text-xs font-medium text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-900/90 border border-slate-800 text-xs font-medium text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="truncate max-w-[140px] sm:max-w-[180px]">{currentWorkspace}</span>
-            <span className="material-symbols-outlined text-sm text-slate-400">expand_more</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <span className="truncate text-xs max-w-[100px] sm:max-w-[140px]">{currentWorkspace}</span>
+            <span className="material-symbols-outlined text-sm text-slate-400 shrink-0">expand_more</span>
           </button>
 
           {isWorkspaceOpen && (
