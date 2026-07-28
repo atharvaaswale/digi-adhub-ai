@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="w-full h-16 px-3 sm:px-4 flex items-center justify-between overflow-hidden bg-slate-950 border-b border-slate-800 shrink-0 sticky top-0 z-30">
+    <header className="w-full h-16 px-3 sm:px-4 flex items-center justify-between bg-slate-950 border-b border-slate-800 shrink-0 sticky top-0 z-40">
       {/* Left Branding & Hamburger Toggle */}
       <div className="flex items-center gap-2 min-w-0">
         {/* Mobile Hamburger Toggle Button */}
@@ -94,37 +94,40 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {isWorkspaceOpen && (
-            <div className="absolute top-full left-0 mt-1 w-64 bg-slate-900 border border-slate-800 rounded-lg shadow-2xl p-1.5 z-50">
-              <div className="px-2 py-1 text-[10px] font-mono-label text-slate-400 uppercase tracking-wider">
-                Switch Workspace
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setIsWorkspaceOpen(false)} />
+              <div className="absolute top-full left-0 mt-1 w-64 bg-slate-900 border border-slate-800 rounded-lg shadow-2xl p-1.5 z-50">
+                <div className="px-2 py-1 text-[10px] font-mono-label text-slate-400 uppercase tracking-wider">
+                  Switch Workspace
+                </div>
+                {[
+                  { name: 'DIG Infotech Solutions', cid: '482-910-3301', active: true },
+                  { name: 'Apex E-Commerce Global', cid: '882-104-5519', active: false },
+                  { name: 'SaaS Scale Partner', cid: '119-402-9932', active: false },
+                ].map((ws) => (
+                  <button
+                    key={ws.cid}
+                    onClick={() => {
+                      setCurrentWorkspace(ws.name);
+                      setIsWorkspaceOpen(false);
+                    }}
+                    className={`w-full text-left px-2.5 py-2 rounded-md text-xs flex items-center justify-between transition-colors ${
+                      ws.name === currentWorkspace
+                        ? 'bg-indigo-950/60 text-indigo-200 border border-indigo-800/40'
+                        : 'text-slate-300 hover:bg-slate-800/60'
+                    }`}
+                  >
+                    <div className="truncate">
+                      <div className="font-medium text-slate-200">{ws.name}</div>
+                      <div className="text-[10px] text-slate-500 font-mono-label">CID: {ws.cid}</div>
+                    </div>
+                    {ws.name === currentWorkspace && (
+                      <span className="material-symbols-outlined text-sm text-indigo-400">check</span>
+                    )}
+                  </button>
+                ))}
               </div>
-              {[
-                { name: 'DIG Infotech Solutions', cid: '482-910-3301', active: true },
-                { name: 'Apex E-Commerce Global', cid: '882-104-5519', active: false },
-                { name: 'SaaS Scale Partner', cid: '119-402-9932', active: false },
-              ].map((ws) => (
-                <button
-                  key={ws.cid}
-                  onClick={() => {
-                    setCurrentWorkspace(ws.name);
-                    setIsWorkspaceOpen(false);
-                  }}
-                  className={`w-full text-left px-2.5 py-2 rounded-md text-xs flex items-center justify-between transition-colors ${
-                    ws.name === currentWorkspace
-                      ? 'bg-indigo-950/60 text-indigo-200 border border-indigo-800/40'
-                      : 'text-slate-300 hover:bg-slate-800/60'
-                  }`}
-                >
-                  <div className="truncate">
-                    <div className="font-medium text-slate-200">{ws.name}</div>
-                    <div className="text-[10px] text-slate-500 font-mono-label">CID: {ws.cid}</div>
-                  </div>
-                  {ws.name === currentWorkspace && (
-                    <span className="material-symbols-outlined text-sm text-indigo-400">check</span>
-                  )}
-                </button>
-              ))}
-            </div>
+            </>
           )}
         </div>
       </div>
@@ -197,23 +200,26 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 top-full mt-2 w-80 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-3 z-50">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
-                <span className="text-xs font-semibold text-slate-200">System Notifications</span>
-                <span className="text-[10px] text-indigo-400 font-mono-label">3 New</span>
-              </div>
-              <div className="space-y-2 max-h-64 overflow-y-auto custom-scrollbar">
-                {notifications.map((n) => (
-                  <div key={n.id} className="p-2 rounded-lg bg-slate-800/40 border border-slate-800 text-xs">
-                    <div className="flex items-center justify-between text-slate-200 font-medium mb-0.5">
-                      <span>{n.title}</span>
-                      <span className="text-[10px] text-slate-500">{n.time}</span>
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setShowNotifications(false)} />
+              <div className="absolute right-0 top-full mt-2 w-80 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-3 z-50">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
+                  <span className="text-xs font-semibold text-slate-200">System Notifications</span>
+                  <span className="text-[10px] text-indigo-400 font-mono-label">3 New</span>
+                </div>
+                <div className="space-y-2 max-h-64 overflow-y-auto custom-scrollbar">
+                  {notifications.map((n) => (
+                    <div key={n.id} className="p-2 rounded-lg bg-slate-800/40 border border-slate-800 text-xs">
+                      <div className="flex items-center justify-between text-slate-200 font-medium mb-0.5">
+                        <span>{n.title}</span>
+                        <span className="text-[10px] text-slate-500">{n.time}</span>
+                      </div>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">{n.message}</p>
                     </div>
-                    <p className="text-slate-400 text-[11px] leading-relaxed">{n.message}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
 
