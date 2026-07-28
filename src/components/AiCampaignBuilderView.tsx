@@ -371,9 +371,12 @@ export const AiCampaignBuilderView: React.FC<AiCampaignBuilderViewProps> = ({ on
                 >
                   <div className="flex items-center gap-2 min-w-0 pr-2">
                     <button
+                      type="button"
                       onClick={() => togglePin(h.id)}
-                      className={`p-1 rounded text-xs transition-colors ${
-                        h.pinned ? 'text-indigo-400 bg-indigo-950/80' : 'text-slate-600 hover:text-slate-300'
+                      className={`p-1 rounded text-xs transition-all ${
+                        h.pinned
+                          ? 'text-indigo-300 bg-indigo-600/30 border border-indigo-500/40 font-bold shadow-sm shadow-indigo-500/20'
+                          : 'text-slate-500 hover:text-slate-300 opacity-40 hover:opacity-100'
                       }`}
                       title={h.pinned ? 'Unpin Headline' : 'Pin Headline'}
                     >
@@ -384,8 +387,8 @@ export const AiCampaignBuilderView: React.FC<AiCampaignBuilderViewProps> = ({ on
 
                   <div className="flex items-center gap-2 shrink-0">
                     <span
-                      className={`text-[10px] font-mono-label px-1.5 py-0.5 rounded ${
-                        h.charCount <= 30 ? 'text-slate-400 bg-slate-800' : 'text-red-400 bg-red-950'
+                      className={`text-xs font-mono-label shrink-0 select-none ${
+                        h.charCount <= 30 ? 'text-slate-500' : 'text-red-400 font-bold'
                       }`}
                     >
                       {h.charCount}/30

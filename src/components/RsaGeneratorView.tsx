@@ -248,8 +248,8 @@ export const RsaGeneratorView: React.FC = () => {
 
                   {/* Character Counter */}
                   <span
-                    className={`text-[10px] font-mono-label px-1.5 py-0.5 rounded ${
-                      isOver ? 'text-red-400 bg-red-950/80 font-bold' : 'text-slate-400 bg-slate-800'
+                    className={`text-xs font-mono-label shrink-0 select-none ${
+                      isOver ? 'text-red-400 font-bold' : 'text-slate-500'
                     }`}
                   >
                     {charCount}/30
@@ -257,15 +257,20 @@ export const RsaGeneratorView: React.FC = () => {
 
                   {/* Pin Toggle Button */}
                   <button
+                    type="button"
                     onClick={() => cycleHeadlinePin(h.id)}
-                    className={`px-2 py-1 rounded text-[10px] font-mono-label transition-colors border ${
-                      h.pinnedPosition > 0
-                        ? 'bg-cyan-950 border-cyan-700 text-cyan-300 font-bold'
-                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200'
-                    }`}
+                    className="shrink-0 transition-all"
                     title="Toggle pin position (1, 2, 3 or unpinned)"
                   >
-                    {h.pinnedPosition > 0 ? `PIN ${h.pinnedPosition}` : 'UNPIN'}
+                    {h.pinnedPosition > 0 ? (
+                      <span className="px-2 py-0.5 bg-cyan-500 text-slate-950 font-bold text-[10px] font-mono-label rounded shadow-sm shadow-cyan-500/20">
+                        PIN {h.pinnedPosition}
+                      </span>
+                    ) : (
+                      <span className="p-1 rounded text-slate-500 hover:text-slate-300 opacity-40 hover:opacity-100 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-base">push_pin</span>
+                      </span>
+                    )}
                   </button>
                 </div>
               );
@@ -302,16 +307,17 @@ export const RsaGeneratorView: React.FC = () => {
                     placeholder="Enter description copy..."
                   />
 
-                  <div className="flex flex-col items-end gap-1.5">
+                  <div className="flex flex-col items-end gap-1.5 shrink-0">
                     <span
-                      className={`text-[10px] font-mono-label px-1.5 py-0.5 rounded ${
-                        isOver ? 'text-red-400 bg-red-950/80 font-bold' : 'text-slate-400 bg-slate-800'
+                      className={`text-xs font-mono-label shrink-0 select-none ${
+                        isOver ? 'text-red-400 font-bold' : 'text-slate-500'
                       }`}
                     >
                       {charCount}/90
                     </span>
 
                     <button
+                      type="button"
                       onClick={() =>
                         setDescriptions((prev) =>
                           prev.map((item) =>
@@ -319,13 +325,18 @@ export const RsaGeneratorView: React.FC = () => {
                           )
                         )
                       }
-                      className={`px-2 py-0.5 rounded text-[10px] font-mono-label border ${
-                        d.pinnedPosition > 0
-                          ? 'bg-indigo-950 border-indigo-700 text-indigo-300 font-bold'
-                          : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200'
-                      }`}
+                      className="shrink-0 transition-all"
+                      title="Toggle pin position"
                     >
-                      {d.pinnedPosition > 0 ? 'PIN 1' : 'UNPIN'}
+                      {d.pinnedPosition > 0 ? (
+                        <span className="px-2 py-0.5 bg-indigo-500 text-white font-bold text-[10px] font-mono-label rounded shadow-sm shadow-indigo-500/20">
+                          PIN 1
+                        </span>
+                      ) : (
+                        <span className="p-1 rounded text-slate-500 hover:text-slate-300 opacity-40 hover:opacity-100 flex items-center justify-center">
+                          <span className="material-symbols-outlined text-base">push_pin</span>
+                        </span>
+                      )}
                     </button>
                   </div>
                 </div>

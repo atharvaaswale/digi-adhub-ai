@@ -16,8 +16,6 @@ interface NavGroup {
     id: ToolView;
     label: string;
     icon: string;
-    badge?: string;
-    badgeColor?: string;
   }[];
 }
 
@@ -33,9 +31,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       category: 'AI GENERATION',
       items: [
-        { id: 'ai_builder', label: 'AI Campaign Builder', icon: 'auto_awesome', badge: 'HOT', badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' },
-        { id: 'rsa_gen', label: 'RSA Generator', icon: 'ads_click', badge: '15 Headlines', badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' },
-        { id: 'pmax_gen', label: 'PMax Asset Gen', icon: 'view_carousel', badge: 'Multi', badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
+        { id: 'ai_builder', label: 'AI Campaign Builder', icon: 'auto_awesome' },
+        { id: 'rsa_gen', label: 'RSA Generator', icon: 'ads_click' },
+        { id: 'pmax_gen', label: 'PMax Asset Gen', icon: 'view_carousel' },
         { id: 'ad_rewriter', label: 'Ad Copy Rewriter', icon: 'edit_note' },
       ],
     },
@@ -50,7 +48,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       category: 'OPTIMIZATION',
       items: [
-        { id: 'landing_audit', label: 'Landing Page Audit', icon: 'fact_check', badge: 'CRO', badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
+        { id: 'landing_audit', label: 'Landing Page Audit', icon: 'fact_check' },
         { id: 'quality_score', label: 'Quality Score Optimiser', icon: 'speed' },
         { id: 'conversion_checker', label: 'Conversion Tracking', icon: 'checklist' },
       ],
@@ -58,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       category: 'STRATEGY & FINANCIALS',
       items: [
-        { id: 'roas_calc', label: 'ROAS Calculator', icon: 'calculate', badge: 'Live', badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
+        { id: 'roas_calc', label: 'ROAS Calculator', icon: 'calculate' },
         { id: 'budget_planner', label: 'Budget Planner', icon: 'payments' },
       ],
     },
@@ -126,32 +124,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleToolSelect(item.id)}
-                  className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between transition-all group ${
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-all group flex items-center justify-between ${
                     isActive
-                      ? 'bg-indigo-600/20 text-white border border-indigo-500/40 shadow-sm shadow-indigo-600/10 font-bold'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
+                      ? 'bg-indigo-600/15 text-white font-semibold border border-indigo-500/30'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 font-normal'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <span
                       className={`material-symbols-outlined text-lg transition-colors ${
-                        isActive ? 'text-indigo-400' : 'text-slate-400 group-hover:text-slate-200'
+                        isActive ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300 opacity-70 group-hover:opacity-100'
                       }`}
                     >
                       {item.icon}
                     </span>
                     <span className="truncate">{item.label}</span>
                   </div>
-
-                  {item.badge && (
-                    <span
-                      className={`text-[9px] px-1.5 py-0.5 rounded border font-mono-label font-medium shrink-0 ml-1 ${
-                        item.badgeColor || 'bg-slate-800 text-slate-300 border-slate-700'
-                      }`}
-                    >
-                      {item.badge}
-                    </span>
-                  )}
                 </button>
               );
             })}

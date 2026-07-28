@@ -130,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Navigation Tabs Center */}
-      <div className="hidden md:flex items-center gap-1 bg-slate-900/80 p-1 rounded-lg border border-slate-800/80">
+      <div className="hidden sm:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800/80">
         {[
           { id: 'campaigns', label: 'Campaign Builder', icon: 'campaign' },
           { id: 'reporting', label: 'Performance Analytics', icon: 'analytics' },
@@ -139,14 +139,14 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as MainNavTab)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === tab.id
-                ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-md shadow-indigo-600/30'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                ? 'bg-indigo-600 text-white font-semibold border border-indigo-500/40 shadow-sm'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 font-normal'
             }`}
           >
             <span className="material-symbols-outlined text-base">{tab.icon}</span>
-            {tab.label}
+            <span>{tab.label}</span>
           </button>
         ))}
       </div>
