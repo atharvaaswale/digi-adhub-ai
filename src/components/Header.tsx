@@ -51,9 +51,9 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="w-full h-16 px-3 sm:px-4 flex items-center justify-between bg-slate-950 border-b border-slate-800 shrink-0 sticky top-0 z-40">
+    <header className="h-14 w-full px-4 flex items-center justify-between border-b border-slate-800 bg-slate-950 shrink-0 sticky top-0 z-40">
       {/* Left Branding & Hamburger Toggle */}
-      <div className="flex items-center gap-2 min-w-0">
+      <div className="flex items-center gap-2.5 min-w-0">
         {/* Mobile Hamburger Toggle Button */}
         {onToggleMobileMenu && (
           <button
@@ -71,25 +71,25 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 font-bold text-lg shrink-0">
             <span className="material-symbols-outlined text-xl">auto_awesome</span>
           </div>
-          <div className="leading-tight min-w-0">
-            <h1 className="font-bold text-sm sm:text-base bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent truncate flex items-center">
+          <div className="leading-tight min-w-0 hidden lg:block">
+            <h1 className="font-bold text-sm lg:text-base bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent truncate flex items-center">
               <span>AdSynthesize</span>
-              <span className="text-indigo-400 font-extrabold text-[10px] sm:text-xs px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded bg-indigo-950/80 border border-indigo-800/50 ml-1 shrink-0">AI</span>
+              <span className="text-indigo-400 font-extrabold text-[10px] lg:text-xs px-1.5 py-0.5 rounded bg-indigo-950/80 border border-indigo-800/50 ml-1 shrink-0">AI</span>
             </h1>
-            <p className="text-[10px] text-slate-400 font-mono-label tracking-tight hidden sm:block">NEURAL ADS WORKSTATION</p>
+            <p className="text-[10px] text-slate-400 font-mono-label tracking-tight">NEURAL ADS WORKSTATION</p>
           </div>
         </div>
 
-        <div className="h-5 w-[1px] bg-slate-800 hidden md:block shrink-0" />
+        <div className="h-5 w-[1px] bg-slate-800 hidden lg:block shrink-0" />
 
         {/* Workspace Dropdown */}
-        <div className="relative hidden sm:block">
+        <div className="relative hidden lg:block">
           <button
             onClick={() => setIsWorkspaceOpen(!isWorkspaceOpen)}
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-900/90 border border-slate-800 text-xs font-medium text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span className="truncate text-xs max-w-[100px] sm:max-w-[140px]">{currentWorkspace}</span>
+            <span className="truncate text-xs max-w-[120px] xl:max-w-[160px]">{currentWorkspace}</span>
             <span className="material-symbols-outlined text-sm text-slate-400 shrink-0">expand_more</span>
           </button>
 
@@ -133,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Navigation Tabs Center */}
-      <div className="hidden sm:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800/80">
+      <div className="hidden lg:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800/80">
         {[
           { id: 'campaigns', label: 'Campaign Builder', icon: 'campaign' },
           { id: 'reporting', label: 'Performance Analytics', icon: 'analytics' },
@@ -159,11 +159,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Google Ads API status badge */}
         <button
           onClick={() => setApiConnected(!apiConnected)}
-          className={`hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono-label border transition-colors ${
-            apiConnected
-              ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-300'
-              : 'bg-amber-950/40 border-amber-800/60 text-amber-300'
-          }`}
+          className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono-label border transition-colors bg-emerald-950/40 border-emerald-800/60 text-emerald-300"
           title="Google Ads API Connection Status"
         >
           <span className={`w-1.5 h-1.5 rounded-full ${apiConnected ? 'bg-emerald-400 animate-ping' : 'bg-amber-400'}`} />
@@ -173,7 +169,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Save Draft */}
         <button
           onClick={onSaveDraft}
-          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors"
+          className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors"
         >
           <span className="material-symbols-outlined text-sm">save</span>
           <span>Save Draft</span>
@@ -182,15 +178,14 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Launch Campaign Button */}
         <button
           onClick={onLaunchCampaign}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-600/25 transition-all ai-glow-button"
+          className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-600/25 transition-all ai-glow-button"
         >
           <span className="material-symbols-outlined text-sm">rocket_launch</span>
-          <span className="hidden xs:inline">Launch Campaign</span>
-          <span className="xs:hidden">Launch</span>
+          <span>Launch Campaign</span>
         </button>
 
         {/* Notification Bell */}
-        <div className="relative">
+        <div className="relative hidden lg:block">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
             className="p-1.5 text-slate-400 hover:text-white rounded-md bg-slate-900 border border-slate-800 hover:border-slate-700 relative"
@@ -224,7 +219,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* User Profile Avatar */}
-        <div className="flex items-center gap-2 pl-1">
+        <div className="flex items-center gap-2 shrink-0">
           <img
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
             alt="Alex Rivera"
