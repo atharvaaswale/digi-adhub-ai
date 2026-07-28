@@ -6,6 +6,8 @@ interface HeaderProps {
   setActiveTab: (tab: MainNavTab) => void;
   onLaunchCampaign: () => void;
   onSaveDraft: () => void;
+  isMobileMenuOpen?: boolean;
+  onToggleMobileMenu?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -13,6 +15,8 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   onLaunchCampaign,
   onSaveDraft,
+  isMobileMenuOpen,
+  onToggleMobileMenu,
 }) => {
   const [currentWorkspace, setCurrentWorkspace] = useState('DIG Infotech Solutions');
   const [isWorkspaceOpen, setIsWorkspaceOpen] = useState(false);
@@ -49,7 +53,20 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="h-16 border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl px-4 flex items-center justify-between z-30 shrink-0 sticky top-0">
       {/* Left Branding & Workspace Selector */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        {/* Mobile Hamburger Toggle Button */}
+        {onToggleMobileMenu && (
+          <button
+            onClick={onToggleMobileMenu}
+            className="lg:hidden flex items-center justify-center p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors"
+            aria-label="Toggle Navigation Menu"
+          >
+            <span className="material-symbols-outlined text-xl">
+              {isMobileMenuOpen ? 'close' : 'menu'}
+            </span>
+          </button>
+        )}
+
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 font-bold text-lg">
             <span className="material-symbols-outlined text-xl">auto_awesome</span>

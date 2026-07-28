@@ -17,6 +17,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<MainNavTab>('campaigns');
   const [currentView, setCurrentView] = useState<ToolView>('ai_builder');
   const [isLaunchModalOpen, setIsLaunchModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [globalToast, setGlobalToast] = useState<string | null>(null);
 
   const showGlobalToast = (msg: string) => {
@@ -44,37 +45,43 @@ export default function App() {
         setActiveTab={setActiveTab}
         onLaunchCampaign={() => setIsLaunchModalOpen(true)}
         onSaveDraft={handleSaveDraft}
+        isMobileMenuOpen={isMobileMenuOpen}
+        onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       />
 
       {/* Main Workspace Body */}
-      <div className="flex-1 flex min-h-0 overflow-hidden">
-        {activeTab === 'campaigns' && (
-          <>
-            {/* Left Sidebar Navigation */}
-            <Sidebar currentView={currentView} onSelectView={setCurrentView} />
+      <div className="flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden">
+        {/* Left Sidebar Navigation & Mobile Drawer */}
+        <Sidebar
+          currentView={currentView}
+          onSelectView={setCurrentView}
+          isMobileOpen={isMobileMenuOpen}
+          onCloseMobile={() => setIsMobileMenuOpen(false)}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
 
-            {/* Middle Main Tool View Workspace */}
-            <main className="flex-1 flex flex-col min-w-0 bg-[#020617] overflow-hidden">
-              {currentView === 'ai_builder' && (
-                <AiCampaignBuilderView onLaunchCampaign={() => setIsLaunchModalOpen(true)} />
-              )}
-              {currentView === 'rsa_gen' && <RsaGeneratorView />}
-              {currentView === 'pmax_gen' && <PMaxAssetGenView />}
-              {currentView === 'ad_rewriter' && <AdCopyRewriterView />}
-              {currentView === 'keyword_intel' && <KeywordResearchView />}
-              {currentView === 'negative_kw' && <KeywordResearchView />}
-              {currentView === 'competitor_analysis' && <KeywordResearchView />}
-              {currentView === 'landing_audit' && <LandingPageAuditView />}
-              {currentView === 'quality_score' && <LandingPageAuditView />}
-              {currentView === 'conversion_checker' && <LandingPageAuditView />}
-              {currentView === 'roas_calc' && (
-                <RoasCalculatorView onSyncGoogleAds={() => setIsLaunchModalOpen(true)} />
-              )}
-              {currentView === 'budget_planner' && (
-                <RoasCalculatorView onSyncGoogleAds={() => setIsLaunchModalOpen(true)} />
-              )}
-            </main>
-          </>
+        {activeTab === 'campaigns' && (
+          <main className="flex-1 flex flex-col min-w-0 bg-[#020617] overflow-hidden">
+            {currentView === 'ai_builder' && (
+              <AiCampaignBuilderView onLaunchCampaign={() => setIsLaunchModalOpen(true)} />
+            )}
+            {currentView === 'rsa_gen' && <RsaGeneratorView />}
+            {currentView === 'pmax_gen' && <PMaxAssetGenView />}
+            {currentView === 'ad_rewriter' && <AdCopyRewriterView />}
+            {currentView === 'keyword_intel' && <KeywordResearchView />}
+            {currentView === 'negative_kw' && <KeywordResearchView />}
+            {currentView === 'competitor_analysis' && <KeywordResearchView />}
+            {currentView === 'landing_audit' && <LandingPageAuditView />}
+            {currentView === 'quality_score' && <LandingPageAuditView />}
+            {currentView === 'conversion_checker' && <LandingPageAuditView />}
+            {currentView === 'roas_calc' && (
+              <RoasCalculatorView onSyncGoogleAds={() => setIsLaunchModalOpen(true)} />
+            )}
+            {currentView === 'budget_planner' && (
+              <RoasCalculatorView onSyncGoogleAds={() => setIsLaunchModalOpen(true)} />
+            )}
+          </main>
         )}
 
         {activeTab === 'reporting' && <ReportingView />}

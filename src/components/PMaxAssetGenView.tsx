@@ -4,6 +4,7 @@ export const PMaxAssetGenView: React.FC = () => {
   const [goal, setGoal] = useState<'Sales' | 'Leads' | 'Traffic' | 'App'>('Leads');
   const [aspectRatio, setAspectRatio] = useState<'1.91:1' | '1:1' | '4:5'>('1.91:1');
   const [platformTab, setPlatformTab] = useState<'youtube' | 'search' | 'gmail' | 'display'>('youtube');
+  const [mobileTab, setMobileTab] = useState<'inputs' | 'preview'>('inputs');
 
   const [headline, setHeadline] = useState('AI Automation for Google Ads');
   const [longHeadline, setLongHeadline] = useState('Scale Performance Max Campaigns with Neural Creative Automation');
@@ -36,7 +37,7 @@ export const PMaxAssetGenView: React.FC = () => {
   ];
 
   return (
-    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-4 lg:p-6 gap-6 relative">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-3 sm:p-4 lg:p-6 gap-5 relative">
       {toastMsg && (
         <div className="fixed bottom-20 right-6 bg-purple-600 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-purple-400 z-50 flex items-center gap-2 animate-bounce">
           <span className="material-symbols-outlined text-lg">check_circle</span>
@@ -44,8 +45,36 @@ export const PMaxAssetGenView: React.FC = () => {
         </div>
       )}
 
+      {/* Segmented Mobile Workspace View Toggle Switcher */}
+      <div className="lg:hidden flex bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold w-full shrink-0">
+        <button
+          type="button"
+          onClick={() => setMobileTab('inputs')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'inputs'
+              ? 'bg-purple-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">edit_note</span>
+          <span>Edit Inputs</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobileTab('preview')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'preview'
+              ? 'bg-purple-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">visibility</span>
+          <span>Live Preview</span>
+        </button>
+      </div>
+
       {/* Left Input Configuration Panel */}
-      <div className="w-full lg:w-[460px] flex flex-col gap-5 shrink-0">
+      <div className={`w-full lg:w-[460px] flex-col gap-5 shrink-0 ${mobileTab === 'inputs' ? 'flex' : 'hidden lg:flex'}`}>
         <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-purple-400 text-xl">view_carousel</span>
@@ -145,10 +174,10 @@ export const PMaxAssetGenView: React.FC = () => {
       </div>
 
       {/* Right Multi-Platform Preview Workspace */}
-      <div className="flex-1 flex flex-col gap-5 min-w-0">
+      <div className={`flex-1 flex-col gap-5 min-w-0 ${mobileTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}>
         {/* Platform Selector Tabs */}
-        <div className="p-3 rounded-2xl glass-panel border border-slate-800 flex items-center justify-between">
-          <div className="flex gap-2">
+        <div className="p-3 rounded-2xl glass-panel border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-1.5 w-full sm:w-auto">
             {[
               { id: 'youtube', label: 'YouTube Video Ad', icon: 'smart_display' },
               { id: 'search', label: 'Google Search', icon: 'search' },

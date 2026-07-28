@@ -11,6 +11,7 @@ export const RoasCalculatorView: React.FC<RoasCalculatorViewProps> = ({ onSyncGo
   const [conversionRate, setConversionRate] = useState<number>(3.2);
 
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [mobileTab, setMobileTab] = useState<'inputs' | 'preview'>('inputs');
 
   // Financial Calculations
   const roas = adSpend > 0 ? ((targetRevenue / adSpend) * 100).toFixed(0) : '0';
@@ -26,7 +27,7 @@ export const RoasCalculatorView: React.FC<RoasCalculatorViewProps> = ({ onSyncGo
   };
 
   return (
-    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-4 lg:p-6 gap-6 relative">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-3 sm:p-4 lg:p-6 gap-5 relative">
       {toastMsg && (
         <div className="fixed bottom-20 right-6 bg-emerald-600 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-emerald-400 z-50 flex items-center gap-2 animate-bounce">
           <span className="material-symbols-outlined text-lg">check_circle</span>
@@ -34,8 +35,36 @@ export const RoasCalculatorView: React.FC<RoasCalculatorViewProps> = ({ onSyncGo
         </div>
       )}
 
+      {/* Segmented Mobile Workspace View Toggle Switcher */}
+      <div className="lg:hidden flex bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold w-full shrink-0">
+        <button
+          type="button"
+          onClick={() => setMobileTab('inputs')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'inputs'
+              ? 'bg-emerald-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">edit_note</span>
+          <span>Edit Financial Model</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobileTab('preview')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'preview'
+              ? 'bg-emerald-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">visibility</span>
+          <span>Forecast Report</span>
+        </button>
+      </div>
+
       {/* Inputs Side Panel */}
-      <div className="w-full lg:w-[460px] flex flex-col gap-5 shrink-0">
+      <div className={`w-full lg:w-[460px] flex-col gap-5 shrink-0 ${mobileTab === 'inputs' ? 'flex' : 'hidden lg:flex'}`}>
         <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-emerald-400 text-xl">calculate</span>
@@ -126,7 +155,7 @@ export const RoasCalculatorView: React.FC<RoasCalculatorViewProps> = ({ onSyncGo
       </div>
 
       {/* Right Forecast Cards & Graphs */}
-      <div className="flex-1 flex flex-col gap-5 min-w-0">
+      <div className={`flex-1 flex-col gap-5 min-w-0 ${mobileTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}>
         {/* Top ROAS Metrics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-4 rounded-xl glass-card border border-slate-800 space-y-1">

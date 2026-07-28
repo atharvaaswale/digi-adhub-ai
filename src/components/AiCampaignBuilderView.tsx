@@ -18,6 +18,7 @@ export const AiCampaignBuilderView: React.FC<AiCampaignBuilderViewProps> = ({ on
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [previewDevice, setPreviewDevice] = useState<'mobile' | 'desktop'>('desktop');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [mobileTab, setMobileTab] = useState<'inputs' | 'preview'>('inputs');
 
   const [campaignResult, setCampaignResult] = useState<CampaignGenerationResult>({
     headlines: [
@@ -111,7 +112,7 @@ export const AiCampaignBuilderView: React.FC<AiCampaignBuilderViewProps> = ({ on
   };
 
   return (
-    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-4 lg:p-6 gap-6 relative">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-3 sm:p-4 lg:p-6 gap-5 relative">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-20 right-6 bg-indigo-600 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-indigo-400 z-50 flex items-center gap-2 animate-bounce">
@@ -120,9 +121,37 @@ export const AiCampaignBuilderView: React.FC<AiCampaignBuilderViewProps> = ({ on
         </div>
       )}
 
+      {/* Segmented Mobile Workspace View Toggle Switcher */}
+      <div className="lg:hidden flex bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold w-full shrink-0">
+        <button
+          type="button"
+          onClick={() => setMobileTab('inputs')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'inputs'
+              ? 'bg-indigo-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">edit_note</span>
+          <span>Edit Inputs</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobileTab('preview')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'preview'
+              ? 'bg-indigo-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">visibility</span>
+          <span>Live Preview</span>
+        </button>
+      </div>
+
       {/* Left Input Control Panel */}
-      <div className="w-full lg:w-[480px] xl:w-[520px] flex flex-col gap-5 shrink-0">
-        <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
+      <div className={`w-full lg:w-[480px] xl:w-[520px] flex-col gap-5 shrink-0 ${mobileTab === 'inputs' ? 'flex' : 'hidden lg:flex'}`}>
+        <div className="p-4 sm:p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-indigo-400 text-xl">auto_awesome</span>
@@ -230,7 +259,7 @@ export const AiCampaignBuilderView: React.FC<AiCampaignBuilderViewProps> = ({ on
       </div>
 
       {/* Right Inspector & Live SERP Panel */}
-      <div className="flex-1 flex flex-col gap-5 min-w-0">
+      <div className={`flex-1 flex-col gap-5 min-w-0 ${mobileTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}>
         {/* SERP Live Preview Card */}
         <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-3">
           <div className="flex items-center justify-between pb-2 border-b border-slate-800/80">

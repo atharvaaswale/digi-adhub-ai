@@ -7,6 +7,7 @@ export const LandingPageAuditView: React.FC = () => {
   const [newKeywordInput, setNewKeywordInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [mobileTab, setMobileTab] = useState<'inputs' | 'preview'>('inputs');
 
   const [audit, setAudit] = useState<AuditResult>({
     healthScore: 78,
@@ -73,7 +74,7 @@ export const LandingPageAuditView: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-4 lg:p-6 gap-6 relative">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto custom-scrollbar p-3 sm:p-4 lg:p-6 gap-5 relative">
       {toastMsg && (
         <div className="fixed bottom-20 right-6 bg-indigo-600 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-indigo-400 z-50 flex items-center gap-2 animate-bounce">
           <span className="material-symbols-outlined text-lg">check_circle</span>
@@ -81,8 +82,36 @@ export const LandingPageAuditView: React.FC = () => {
         </div>
       )}
 
+      {/* Segmented Mobile Workspace View Toggle Switcher */}
+      <div className="lg:hidden flex bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold w-full shrink-0">
+        <button
+          type="button"
+          onClick={() => setMobileTab('inputs')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'inputs'
+              ? 'bg-emerald-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">edit_note</span>
+          <span>Edit Inputs</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobileTab('preview')}
+          className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+            mobileTab === 'preview'
+              ? 'bg-emerald-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">visibility</span>
+          <span>Audit Report</span>
+        </button>
+      </div>
+
       {/* Input Side Panel */}
-      <div className="w-full lg:w-[460px] flex flex-col gap-5 shrink-0">
+      <div className={`w-full lg:w-[460px] flex-col gap-5 shrink-0 ${mobileTab === 'inputs' ? 'flex' : 'hidden lg:flex'}`}>
         <div className="p-5 rounded-2xl glass-panel border border-slate-800 space-y-4">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-emerald-400 text-xl">fact_check</span>
@@ -157,7 +186,7 @@ export const LandingPageAuditView: React.FC = () => {
       </div>
 
       {/* Audit Output Workspace */}
-      <div className="flex-1 flex flex-col gap-5 min-w-0">
+      <div className={`flex-1 flex-col gap-5 min-w-0 ${mobileTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}>
         {/* Conversion Health Score Card */}
         <div className="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-5">

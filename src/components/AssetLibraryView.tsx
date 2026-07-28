@@ -46,7 +46,7 @@ export const AssetLibraryView: React.FC = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+        <div className="flex flex-wrap gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
           {[
             { id: 'all', label: 'All Assets' },
             { id: 'headlines', label: 'Headlines' },
